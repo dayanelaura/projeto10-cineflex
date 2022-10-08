@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import Sessoes from './Sessoes';
 import Filmes from "./Filmes";
+import Assentos from "./Assentos";
 
 export default function App(){
     return (
@@ -14,6 +15,8 @@ export default function App(){
         <Routes>
             <Route path="/" element={<Filmes />}></Route>
             <Route path="/sessoes/:idFilme" element={<Sessoes />}></Route>
+            <Route path="/sessoes/:idSessao" element={<Assentos />}></Route>
+            {/* <Route path="/sessoes/:idAssento" element={<Sucesso />}></Route> */}
         </Routes>
         </BrowserRouter>
       </>
