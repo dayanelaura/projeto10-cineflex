@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import TituloPagina from './TituloPagina';
 import loading from '../assets/loading.gif';
 import CORES from '../mock';
+import Formulario from './Formulario';
 
 function ExibirRodape(props){
     const { posterURL, title, hora, weekday } = props;
@@ -34,21 +34,21 @@ function EscolherAssentos(props){
 		return(
 			<DivAssento 
 				background={amarelo} 
-				border={() => bordaamarela}
+				border={bordaamarela}
 				onClick={() => alert("Esse assento não está disponível")}>
 				{numero}
 			</DivAssento>
 		)
 	}
-    else if(status===true){
+    else if(status){
 		return(
 			<DivAssento 
 				background={cor}  
-				border={() => borda}
-				onClick={ () => {
-					setSelecionado(!selecionado);
+				border={borda}
+				onClick={() => {
 					TrocarCor();
 					setIDs([...IDs, ID]);
+					setSelecionado(!selecionado);
 				}}>
 				{numero}
 			</DivAssento>
@@ -56,11 +56,11 @@ function EscolherAssentos(props){
 	}
 
 	function TrocarCor(){
-		if(cor===cinza){
+		if(selecionado===false){
 			setCor(verde);
 			setBorda(bordaverde);
 		}
-		else if(cor===verde){
+		else if(selecionado===true){
 			setCor(cinza);	
 			setBorda(bordacinza);
 		}
@@ -119,6 +119,11 @@ export default function Assentos() {
 					<h1>Indisponível</h1>
 				</span>
 			</Legenda>
+			<Formulario 
+				IDs={IDs} setIDs={setIDs} hora={items.name} 
+				title={movie.title} numero={seats.name}
+				weekday={day.weekday} yearday={day.date} 
+			/>
             <ExibirRodape 
 				posterURL={movie.posterURL} title={movie.title} 
 				hora={items.name} weekday={day.weekday} />
@@ -170,7 +175,7 @@ const AssentosContainer = styled.div`
 	margin-top: -15px;
 
 	span {
-		width: 380px;
+		width: 390px;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
@@ -181,7 +186,7 @@ const AssentosContainer = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		margin: 10px 2px ;
+		margin: 18px 5px ;
 		margin-top: 0px;
 		font-family: 'Roboto';
 		font-weight: 400;
