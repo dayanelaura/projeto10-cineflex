@@ -85,13 +85,13 @@ const SessoesContainer = styled.div`
         font-size: 20px;
         letter-spacing: 0.02e;
         color: #293845;
-        margin-left: 28px;
+        padding-left: 28px;
 /*         text-decoration: none; */
     }
 
     div {
         display: flex;
-        margin-left: 28px;
+        padding-left: 28px;
 /*         text-decoration: none; */
     }
 

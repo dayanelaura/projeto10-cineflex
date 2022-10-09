@@ -13,10 +13,10 @@ export default function App(){
         <GlobalStyles />
         <Topo>CINEFLEX</Topo>
         <Routes>
-            <Route path="/" element={<Filmes />}></Route>
+            <Route index element={<Filmes />}></Route>
             <Route path="/sessoes/:idFilme" element={<Sessoes />}></Route>
-            <Route path="/sessoes/:idSessao" element={<Assentos />}></Route>
-            {/* <Route path="/sessoes/:idAssento" element={<Sucesso />}></Route> */}
+            <Route path="/assentos/:idSessao" element={<Assentos />}></Route>
+            {/* <Route path="/sucesso" element={<Sucesso />}></Route> */}
         </Routes>
         </BrowserRouter>
       </>
