@@ -12,7 +12,7 @@ function ExibirRodape(props){
 
     return (
         <Footer>
-            <img src={posterURL} alt="poster do filme" />
+            <img data-identifier="movie-img-preview" src={posterURL} alt="poster do filme" />
 			<div data-identifier="movie-and-session-infos-preview">
 				<p>{title}</p>
 				<p>{weekday} - {hora}</p>
@@ -22,7 +22,7 @@ function ExibirRodape(props){
 }
 	
 const { verde, cinza, amarelo, bordaverde, bordacinza, bordaamarela } = CORES;
-const cadeiras = [];
+let cadeiras = [];
 
 function EscolherAssentos(props){
 	const { status, numero, ID, ids, setIds } = props;
@@ -88,6 +88,8 @@ export default function Assentos() {
 	useEffect(() => {
 		const requisicao = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
 
+		cadeiras=[];
+		
 		requisicao.then(resposta => {
 			setItems(resposta.data);
 		});

@@ -29,6 +29,7 @@ function EscolherHorario(props){
                 <Link 
                     data-identifier="hour-minute-btn" 
                     to = {`/assentos/${value.id}`} 
+                    style={{ textDecoration: 'none' }}
                     key={value.id} >
                     <span>{value.name}</span>
                 </Link>
@@ -81,7 +82,6 @@ const SessoesContainer = styled.div`
     flex-direction: column;
     text-align: left;
     align-items: flex-start;
-/*     text-decoration: none; */
     
     p {
         line-height: 23px;
@@ -89,13 +89,11 @@ const SessoesContainer = styled.div`
         letter-spacing: 0.02e;
         color: #293845;
         padding-left: 28px;
-/*         text-decoration: none; */
     }
 
     div {
         display: flex;
         padding-left: 28px;
-/*         text-decoration: none; */
     }
 
     span {
@@ -113,7 +111,6 @@ const SessoesContainer = styled.div`
         justify-content: center;
         align-items: center;
         text-align: center;
-/*         text-decoration: none; */
     }
 `
 

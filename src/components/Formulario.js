@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import InputMask from "react-input-mask";
 
 export default function Formulario(props){
     const { ids, hora, title, yearday, cadeiras } = props;
@@ -48,12 +49,12 @@ export default function Formulario(props){
                         onChange={(e) => setName(e.target.value)}
                         value={name} required />
                     <label htmlFor="CPF do comprador"> CPF do comprador: </label>
-                    <input 
+                    <InputMask mask="999.999.999-99" 
                         data-identifier="buyer-cpf-input"
-                        type="number" placeholder="Digite seu CPF..."
+                        type="text" placeholder="Digite seu CPF..."
                         onChange={(e) => setCpf(e.target.value)}
                         value={cpf} required />
-                    <button 
+                    <button
                         data-identifier="reservation-btn" 
                         type="submit"> 
                         Reservar assento(s) 

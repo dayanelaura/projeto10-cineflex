@@ -6,7 +6,7 @@ export default function Sucesso(){
     const location = useLocation();
     const dadosReserva = location.state.ingressos;
     const { cpf, name, hora, yearday, title, cadeiras } = dadosReserva;
-
+    
     return(
         <>
             <TituloPagina fontweight={700} color={`#247A6B`}>
@@ -20,13 +20,13 @@ export default function Sucesso(){
                 <h1>Ingressos</h1>
                 { cadeiras.map((value, index) => (
                     <h2 data-identifier="seat-infos-reserve-finished" key={index}>
-                        Assento {value}
+                    Assento {value}
                     </h2> )) }
                 <h1>Comprador</h1>
                 <h2 data-identifier="buyer-infos-reserve-finished">Nome: {name}</h2>
                 <h2 data-identifier="buyer-infos-reserve-finished">CPF: {cpf}</h2>
             </IngressoContainer>
-            <Link to="/" data-identifier="back-to-home-btn">
+            <Link to="/" data-identifier="back-to-home-btn" style={{ textDecoration: 'none' }}>
                 <BotaoHome>Voltar para Home</BotaoHome>
             </Link>
         </>
