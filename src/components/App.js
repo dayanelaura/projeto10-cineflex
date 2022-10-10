@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Sessoes from './Sessoes';
 import Filmes from "./Filmes";
 import Assentos from "./Assentos";
+import Sucesso from "./Sucesso";
 
 export default function App(){
     return (
@@ -16,7 +17,8 @@ export default function App(){
             <Route index element={<Filmes />}></Route>
             <Route path="/sessoes/:idFilme" element={<Sessoes />}></Route>
             <Route path="/assentos/:idSessao" element={<Assentos />}></Route>
-            {/* <Route path="/sucesso" element={<Sucesso />}></Route> */}
+            <Route path="/sucesso" element={<Sucesso />}></Route>
+            {/* <Route path='*' element={<h1>Not Found</h1>} /> */}
         </Routes>
         </BrowserRouter>
       </>

@@ -4,47 +4,49 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Formulario(props){
-    const { IDs, setIDs, hora, title, numero, weekday, yearday } = props;
+    const { ids, setIds, hora, title, numero, weekday, yearday } = props;
 
-    const [nome, setNome] = useState("");
-    const [CPF, setCPF] = useState("");
-    let ingressos = {};
-    let reserva = {};
+    const [name, setName] = useState("");
+    const [cpf, setCpf] = useState("");
     const navigate = useNavigate();
 
-    function preencherForm(){ 
-        
-        if(IDs.length===0)
-            alert("Nenhum assento foi selecionado")
-        else{
-            reserva = { IDs, nome, CPF }
-            ingressos = { ...reserva, title, yearday, hora }
-        }
-    }
-
-    function enviarPedido(e){
+    function preencherForm(e){ 
         e.preventDefault();
 
+        let reserva = { 
+            ids, 
+            name, 
+            cpf
+        };
+        let ingressos = { 
+            ...reserva, 
+            title, 
+            yearday, 
+            hora 
+        };
+        
         const promise = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', reserva);
 
-        promise.then(() => navigate("/sucesso", { state: ingressos }));
+        promise.then(() => navigate("/sucesso", { state: {ingressos} }));
         promise.catch(()=> alert("erro"))
     }
 
     return(
         <AjusteLayout>
-            <FormsContainer onSubmit={preencherForm}>
-                <label htmlFor="Nome do comprador"> Nome do comprador: </label>
-                <input type="text" name="name" placeholder="Digite seu nome..."
-                    onChange={(e) => setNome(e.target.value)}
-                    value={nome}
-                />
-                <label htmlFor="CPF do comprador"> CPF do comprador: </label>
-                <input type="text" name="cpf" placeholder="Digite seu CPF..."
-                    onChange={(e) => setCPF(e.target.value)}
-                    value={CPF}
-                />
-                <button type="submit" onClick={enviarPedido}> Reservar assento(s) </button>
+            <FormsContainer>
+                <form onSubmit={preencherForm}>
+                    <label htmlFor="Nome do comprador"> Nome do comprador: </label>
+                    <input type="text" placeholder="Digite seu nome..."
+                        onChange={(e) => setName(e.target.value)}
+                        value={name}
+                        required />
+                    <label htmlFor="CPF do comprador"> CPF do comprador: </label>
+                    <input type="number" placeholder="Digite seu CPF..."
+                        onChange={(e) => setCpf(e.target.value)}
+                        value={cpf}
+                        required />
+                    <button type="submit"> Reservar assento(s) </button>
+                </form>
             </FormsContainer> 
         </AjusteLayout>
     )
@@ -58,18 +60,18 @@ const AjusteLayout = styled.div`
 `
 
 const FormsContainer = styled.div`
-    width: 328px;
+    width: 360px;
     font-family: 'Roboto';
     font-weight: 400;
     font-size: 18px;
     line-height: 21px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-top: 42px;
+    margin-left: -15px;
 
     label {
-        width: 327px;
+        width: 360px;
         height: 25px;
         font-style: normal;
         display: flex;
@@ -77,7 +79,7 @@ const FormsContainer = styled.div`
         color: #293845;
     }
     input {
-        width: 327px;
+        width: 360px;
         height: 51px;
         background: #FFFFFF;
         border: 1px solid #D5D5D5;
@@ -89,7 +91,6 @@ const FormsContainer = styled.div`
         line-height: 21px;
         display: flex;
         align-items: center;
-        color: #AFAFAF;
         margin-bottom: 7px;
     }
     button {
@@ -110,5 +111,6 @@ const FormsContainer = styled.div`
         letter-spacing: 0.04em;
         color: #FFFFFF;
         margin-bottom: 147px;
+        margin-left: 65px;
     }
 `

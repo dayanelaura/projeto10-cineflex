@@ -24,7 +24,7 @@ function ExibirRodape(props){
 const { verde, cinza, amarelo, bordaverde, bordacinza, bordaamarela } = CORES;
 
 function EscolherAssentos(props){
-    const { status, numero, ID, IDs, setIDs } = props;
+    const { status, numero, ID, ids, setIds } = props;
 	
     const [cor,setCor] = useState(cinza);
 	const [borda, setBorda] = useState(bordacinza);
@@ -47,7 +47,7 @@ function EscolherAssentos(props){
 				border={borda}
 				onClick={() => {
 					TrocarCor();
-					setIDs([...IDs, ID]);
+					setIds([...ids, ID]);
 					setSelecionado(!selecionado);
 				}}>
 				{numero}
@@ -70,7 +70,7 @@ function EscolherAssentos(props){
 export default function Assentos() {
 	const [items, setItems] = useState(null);
 	const { idSessao } = useParams();
-	const [IDs, setIDs] = useState([]);
+	const [ids, setIds] = useState([]);
 
 	useEffect(() => {
 		const requisicao = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/showtimes/${idSessao}/seats`);
@@ -100,8 +100,8 @@ export default function Assentos() {
 							numero={value.name} 
 							status={value.isAvailable} 
 							ID={value.id} 
-							IDs={IDs} 
-							setIDs={setIDs}/>
+							ids={ids} 
+							setIds={setIds}/>
 					)}
 				</span>
 			</AssentosContainer>
@@ -120,7 +120,7 @@ export default function Assentos() {
 				</span>
 			</Legenda>
 			<Formulario 
-				IDs={IDs} setIDs={setIDs} hora={items.name} 
+				ids={ids} setIds={setIds} hora={items.name} 
 				title={movie.title} numero={seats.name}
 				weekday={day.weekday} yearday={day.date} 
 			/>
@@ -142,13 +142,11 @@ const DivAssento = styled.div`
 `
 const Legenda = styled.div`
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: center;
-	margin-right: 20px;
-	margin-left: 20px;
 
 	span {
-		width: 91px;
+		width: 111px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
