@@ -13,7 +13,7 @@ function ExibirRodape(props){
     return (
         <Footer>
             <img src={posterURL} alt="poster do filme" />
-			<div>
+			<div data-identifier="movie-and-session-infos-preview">
 				<p>{title}</p>
 				<p>{weekday} - {hora}</p>
 			</div>
@@ -34,6 +34,7 @@ function EscolherAssentos(props){
 	if (status===false){
 		return(
 			<DivAssento 
+				data-identifier="seat"
 				background={amarelo} 
 				border={bordaamarela}
 				onClick={() => alert("Esse assento não está disponível")}>
@@ -44,6 +45,7 @@ function EscolherAssentos(props){
     else if(status){
 		return(
 			<DivAssento 
+				data-identifier="seat"
 				background={cor}  
 				border={borda}
 				onClick={() => {
@@ -73,6 +75,7 @@ function EscolherAssentos(props){
 			setCor(cinza);	
 			setBorda(bordacinza);
 			removerAssento();
+			console.log(cadeiras)
 		}
 	}
 }
@@ -117,22 +120,33 @@ export default function Assentos() {
 			</AssentosContainer>
 			<Legenda>
 				<span>
-					<DivAssento background={verde} border={bordaverde}></DivAssento>
+					<DivAssento 
+						data-identifier="seat-selected-subtitle" 
+						background={verde} 
+						border={bordaverde}>
+					</DivAssento>
 					<h1>Selecionado</h1>
 				</span>
 				<span>
-					<DivAssento background={cinza} border={bordacinza} ></DivAssento>
+					<DivAssento 
+						data-identifier="seat-available-subtitle"
+						background={cinza} 
+						border={bordacinza} >
+					</DivAssento>
 					<h1>Disponível</h1>
 				</span>
 				<span>
-					<DivAssento background={amarelo} border={bordaamarela}></DivAssento>
+					<DivAssento 
+						data-identifier="seat-unavailable-subtitle"
+						background={amarelo} 
+						border={bordaamarela}>
+					</DivAssento>
 					<h1>Indisponível</h1>
 				</span>
 			</Legenda>
 			<Formulario 
-				ids={ids} setIds={setIds} hora={items.name} 
-				title={movie.title} cadeiras={cadeiras}
-				weekday={day.weekday} yearday={day.date} 
+				ids={ids} hora={items.name} title={movie.title} 
+				yearday={day.date} cadeiras={cadeiras}
 			/>
             <ExibirRodape 
 				posterURL={movie.posterURL} title={movie.title} 

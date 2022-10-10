@@ -5,9 +5,7 @@ import styled from "styled-components";
 export default function Sucesso(){
     const location = useLocation();
     const dadosReserva = location.state.ingressos;
-
-    const { cpf, name, hora, yearday, title, weekday, cadeiras } = dadosReserva;
-    //console.log(cadeiras)
+    const { cpf, name, hora, yearday, title, cadeiras } = dadosReserva;
 
     return(
         <>
@@ -17,15 +15,18 @@ export default function Sucesso(){
             </TituloPagina>
             <IngressoContainer>
                 <h1>Filme e sessão</h1>
-                <p>{title}</p>
-                <p>{yearday} - {hora}</p>
+                <h2 data-identifier="movie-session-infos-reserve-finished">{title}</h2>
+                <h2 data-identifier="movie-session-infos-reserve-finished">{yearday} {hora}</h2>
                 <h1>Ingressos</h1>
-                { cadeiras.map((value, index) => (<p key={index}>Assento {value}</p>)) }
+                { cadeiras.map((value, index) => (
+                    <h2 data-identifier="seat-infos-reserve-finished" key={index}>
+                        Assento {value}
+                    </h2> )) }
                 <h1>Comprador</h1>
-                <p>Nome: {name}</p>
-                <p>CPF: {cpf}</p>
+                <h2 data-identifier="buyer-infos-reserve-finished">Nome: {name}</h2>
+                <h2 data-identifier="buyer-infos-reserve-finished">CPF: {cpf}</h2>
             </IngressoContainer>
-            <Link to="/">
+            <Link to="/" data-identifier="back-to-home-btn">
                 <BotaoHome>Voltar para Home</BotaoHome>
             </Link>
         </>
@@ -43,21 +44,26 @@ const IngressoContainer = styled.div`
     color: #293845;
 
     h1 {
-        margin-top: 25px;
+        margin-top: 38px;
         font-weight: 700;
         font-size: 24px;
+        margin-bottom: 10px;
     }
 
-    p {
+    h2 {
         font-weight: 400;
         font-size: 22px;
-        margin-bottom: 62px;
+        margin-bottom: 5px;
     }
 `
 
 const BotaoHome = styled.div`
     width: 50vw;
     height: 42px;
+    margin-top: 102px;
+    margin-bottom: 80px;
+    margin-left: 100px;
+    margin-right: 100px;
     background: #E8833A;
     border-radius: 3px;
     font-family: 'Roboto';
@@ -71,5 +77,5 @@ const BotaoHome = styled.div`
     text-align: center;
     letter-spacing: 0.04em;
     color: #FFFFFF;
-    margin-left: 114px;
+    text-decoration: none;
 `

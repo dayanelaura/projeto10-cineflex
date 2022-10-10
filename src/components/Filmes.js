@@ -10,7 +10,7 @@ function EscolherFilme(props) {
 
     return (
         <Link to = {`/sessoes/${id}`}>
-            <img src={posterURL} alt="poster do filme" />
+            <img data-identifier="movie-outdoor" src={posterURL} alt="poster do filme" />
         </Link>
     )
 }

@@ -11,8 +11,8 @@ function ExibirRodape(props){
 
     return (
         <Footer>
-            <img src={posterURL} alt="poster do filme" />
-            <p>{title}</p>
+            <img data-identifier="movie-img-preview" src={posterURL} alt="poster do filme" />
+            <p data-identifier="movie-and-session-infos-preview">{title}</p>
         </Footer>
     )
 }
@@ -23,10 +23,13 @@ function EscolherHorario(props){
     return (
         <>
         <SessoesContainer>
-            <p>{weekday} - {date}</p>
+            <p data-identifier="session-date">{weekday} - {date}</p>
             <div>
             {showtimes.map((value) => 
-                <Link to = {`/assentos/${value.id}`} key={value.id} >
+                <Link 
+                    data-identifier="hour-minute-btn" 
+                    to = {`/assentos/${value.id}`} 
+                    key={value.id} >
                     <span>{value.name}</span>
                 </Link>
             )}

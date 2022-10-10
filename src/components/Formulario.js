@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Formulario(props){
-    const { ids, setIds, hora, title, numero, weekday, yearday, cadeiras } = props;
+    const { ids, hora, title, yearday, cadeiras } = props;
 
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
@@ -12,6 +12,10 @@ export default function Formulario(props){
 
     function preencherForm(e){ 
         e.preventDefault();
+
+        if(cadeiras.length===0)
+        alert('Selecione pelo menos 1 assento')
+        else{
 
         let reserva = { 
             ids, 
@@ -30,6 +34,7 @@ export default function Formulario(props){
 
         promise.then(() => navigate("/sucesso", { state: {ingressos} }));
         promise.catch(()=> alert("erro"))
+        }
     }
 
     return(
@@ -37,16 +42,22 @@ export default function Formulario(props){
             <FormsContainer>
                 <form onSubmit={preencherForm}>
                     <label htmlFor="Nome do comprador"> Nome do comprador: </label>
-                    <input type="text" placeholder="Digite seu nome..."
+                    <input
+                        data-identifier="buyer-name-input" 
+                        type="text" placeholder="Digite seu nome..."
                         onChange={(e) => setName(e.target.value)}
-                        value={name}
-                        required />
+                        value={name} required />
                     <label htmlFor="CPF do comprador"> CPF do comprador: </label>
-                    <input type="number" placeholder="Digite seu CPF..."
+                    <input 
+                        data-identifier="buyer-cpf-input"
+                        type="number" placeholder="Digite seu CPF..."
                         onChange={(e) => setCpf(e.target.value)}
-                        value={cpf}
-                        required />
-                    <button type="submit"> Reservar assento(s) </button>
+                        value={cpf} required />
+                    <button 
+                        data-identifier="reservation-btn" 
+                        type="submit"> 
+                        Reservar assento(s) 
+                    </button>
                 </form>
             </FormsContainer> 
         </AjusteLayout>
