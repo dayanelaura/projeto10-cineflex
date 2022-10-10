@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 export default function Formulario(props){
-    const { ids, setIds, hora, title, numero, weekday, yearday } = props;
+    const { ids, setIds, hora, title, numero, weekday, yearday, cadeiras } = props;
 
     const [name, setName] = useState("");
     const [cpf, setCpf] = useState("");
@@ -22,7 +22,8 @@ export default function Formulario(props){
             ...reserva, 
             title, 
             yearday, 
-            hora 
+            hora,
+            cadeiras 
         };
         
         const promise = axios.post('https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many', reserva);

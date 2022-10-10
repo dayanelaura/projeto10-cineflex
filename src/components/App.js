@@ -18,7 +18,7 @@ export default function App(){
             <Route path="/sessoes/:idFilme" element={<Sessoes />}></Route>
             <Route path="/assentos/:idSessao" element={<Assentos />}></Route>
             <Route path="/sucesso" element={<Sucesso />}></Route>
-            {/* <Route path='*' element={<h1>Not Found</h1>} /> */}
+            {/* <Route path='*' render={() => <h1>Not Found</h1>} /> */}
         </Routes>
         </BrowserRouter>
       </>

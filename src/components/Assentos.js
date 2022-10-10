@@ -22,9 +22,10 @@ function ExibirRodape(props){
 }
 	
 const { verde, cinza, amarelo, bordaverde, bordacinza, bordaamarela } = CORES;
+const cadeiras = [];
 
 function EscolherAssentos(props){
-    const { status, numero, ID, ids, setIds } = props;
+	const { status, numero, ID, ids, setIds } = props;
 	
     const [cor,setCor] = useState(cinza);
 	const [borda, setBorda] = useState(bordacinza);
@@ -46,7 +47,7 @@ function EscolherAssentos(props){
 				background={cor}  
 				border={borda}
 				onClick={() => {
-					TrocarCor();
+					trocarCor();
 					setIds([...ids, ID]);
 					setSelecionado(!selecionado);
 				}}>
@@ -55,14 +56,23 @@ function EscolherAssentos(props){
 		)
 	}
 
-	function TrocarCor(){
+	function removerAssento(){
+		for (let i=0; i<cadeiras.length; i++){
+			if (cadeiras[i]===numero)
+				cadeiras.splice(i,1)
+		}
+	}
+
+	function trocarCor(){
 		if(selecionado===false){
 			setCor(verde);
 			setBorda(bordaverde);
+			cadeiras.push(numero);
 		}
 		else if(selecionado===true){
 			setCor(cinza);	
 			setBorda(bordacinza);
+			removerAssento();
 		}
 	}
 }
@@ -121,7 +131,7 @@ export default function Assentos() {
 			</Legenda>
 			<Formulario 
 				ids={ids} setIds={setIds} hora={items.name} 
-				title={movie.title} numero={seats.name}
+				title={movie.title} cadeiras={cadeiras}
 				weekday={day.weekday} yearday={day.date} 
 			/>
             <ExibirRodape 
